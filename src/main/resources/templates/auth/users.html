@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_template :: head('vacinas')}"></head>
+
+<body class="grey lighten-2">
+    <nav th:replace="~{_template :: #navbar}"></nav>
+
+    <main class="container">
+        <div class="card-panel teal lighten-2" th:if="${success}" th:text="${success}"></div>
+        <div class="card-panel red white-text" th:if="${error}" th:text="${error}"></div>
+
+        <h2>Usuários</h2>
+
+        <ul class="collection">
+            <li class="collection-item email" th:each="user : ${users}" >
+                <img th:src="${user.email}" alt="" class="email">
+                <span class="title" th:text="${user.name}"></span>
+                <a href="#!" class="secondary-content" th:text="${user.email}"></a>
+            </li>
+        </ul>
+
+    </main>
+
+</body>
+
+</html>

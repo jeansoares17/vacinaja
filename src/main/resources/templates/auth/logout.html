@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head th:replace="~{_template :: head('logout')}"></head>
+
+<body class="grey lighten-2">
+
+    <main class="container center">
+        
+        <h4>Tem certeza que deseja sair do sistema?</h4>
+
+        <form th:action="${'/logout'}" method="post">
+            <a href="/vacina" class="btn grey">
+                <i class="material-icons left">chevron_left</i>
+                cancelar
+            </a>
+
+            <button class="btn">sim, desejo sair</button>
+
+        </form>
+
+    </main>
+
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_template :: head('vacinas')}"></head>
+<body class="grey lighten-2">
+    <nav th:replace="~{_template :: #navbar}"></nav>
+
+    <main class="container">
+        <div class="card-panel teal lighten-2" th:if="${success}" th:text="${success}"></div>
+        <div class="card-panel red white-text" th:if="${error}" th:text="${error}"></div>
+
+        <h2>Vacinas Pendentes</h2>
+
+        <div class="row">
+            <div class="col s12 m6 l4" th:each="vacina: ${vacina}">
+                <div class="card pink darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title" th:text="${vacina.nome}"></span>
+                        <p th:text="${vacina.lote}"></p>
+                        doses:
+                        <p th:text="${vacina.status}"></p>
+                        <span
+                            data-badge-caption="vacinas"
+                            class="badge blue white-text"
+                            th:text="${vacinas.status}"
+                        ></span>
+                    </div>
+                    <div class="card-action">
+                        <a th:href="${'/vacina/delete/' + vacina.id}" class="btn red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a th:if="${vacina.status != 0}" th:href="${'/vacina/dec/' + vacina.id}" class="btn">
+                            <i class="material-icons">remove</i>
+                        </a>
+                        <a th:if="${vacina.status != 100}" th:href="${'/vacina/inc/' + vacina.id}" class="btn">
+                            <i class="material-icons">add</i>
+                        </a>
+                        <a th:if="${vacina.user == null}" th:href="${'/vacina/catch/' + vacina.id}" class="btn purple" title="tomar vacina">
+                            <i class="material-icons">pan_tool</i>
+                        </a>
+                        <a th:if="${vacina.user != null}" th:href="${'/vacina/drop/' + vacina.id}" class="btn amber black-text" title="não tomar tarefa">
+                            <i class="material-icons">do_not_touch</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="fixed-action-btn">
+        <a href="/vacina/new" class="btn-floating btn-large blue">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        const options = {
+            constrainWidth: false,
+            coverTrigger: false
+        }
+        var instances = M.Dropdown.init(elems, options);
+    });
+</script>
+
+</html>

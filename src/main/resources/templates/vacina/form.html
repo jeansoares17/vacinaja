@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_template :: head('cadastrar')}"></head>
+<body class="grey lighten-2">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Vacinas Já</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li class="active"><a href="/vacina">Vacinas Pendendes</a></li>
+              <li><a href="vacinasAplicadas.html">Vacinas aplicadas</a></li>
+              <li><a href="#">usuário</a></li>
+            </ul>
+          </div>
+    </nav>
+
+    <main class="container">
+
+        <h2>Cadastrar Vacina</h2>
+
+        <div class="card">
+            <form th:action="${'/vacina'}" method="post" th:object="${vacina}">
+                <div class="card-content">
+                    <div class="input-field">
+                        <input 
+                            type="text" 
+                            th:field="*{nome}"
+                            th:classappend="${#fields.hasErrors('nome')} ? invalid"
+                        >
+                        <label for="nome">Nome</label>
+                        <span class="helper-text red-text" th:errors="*{nome}"></span>
+                    </div>
+                    
+                    <div class="input-field">
+                        <textarea 
+                            th:field="*{lote}"
+                            class="materialize-textarea"
+                            th:classappend="${#fields.hasErrors('lote')} ? invalid"
+                        ></textarea>
+                        <label for="lote">Lote</label>
+                        <span class="helper-text red-text" th:errors="*{lote}"></span>
+                    </div>
+
+                    <label for="status">Status</label>
+                    <p class="range-field">
+                        <input 
+                            type="range" 
+                            th:field="*{status}"
+                            min="1" 
+                            max="100" 
+                        />
+                    </p>
+                    <span class="helper-text red-text" th:errors="*{status}"></span>
+
+                </div>
+                <div class="card-action right-align">
+                    <a href="/vacina" class="btn grey">
+                        <i class="material-icons left">chevron_left</i>
+                        cancelar
+                    </a>
+                    <button class="btn">
+                        <i class="material-icons left">check</i>
+                        cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
